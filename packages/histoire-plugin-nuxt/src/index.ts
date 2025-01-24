@@ -171,9 +171,10 @@ async function useNuxtViteConfig(options: NuxtPluginOptions) {
   })
 
   nuxt.hook('imports:sources', (presets) => {
+    const polyfills = ['requestIdleCallback', 'cancelIdleCallback']
     const stubbedComposables = ['useNuxtApp']
     for (const appPreset of presets.filter(p => p.from?.startsWith('#app'))) {
-      appPreset.imports = appPreset.imports.filter(i => typeof i !== 'string' || !stubbedComposables.includes(i))
+      appPreset.imports = appPreset.imports.filter(i => typeof i !== 'string' || (!stubbedComposables.includes(i) && !polyfills.includes(i)))
     }
     presets.push({
       from: '#build/histoire/composables.mjs',
