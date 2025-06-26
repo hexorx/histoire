@@ -1,9 +1,10 @@
 import type { Nuxt } from '@nuxt/schema'
 import type { Plugin } from 'histoire'
-import type { UserConfig as ViteConfig } from 'vite'
+import type { PluginOption, UserConfig as ViteConfig } from 'vite'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import replace from '@rollup/plugin-replace'
+import defu from 'defu'
 
 const ignorePlugins = [
   'nuxt:vite-node-server',
